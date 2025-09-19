@@ -7,7 +7,7 @@ Just a game of hangman.
   - the player can enter a letter
   - draw the character when the player get the letter wrong
 
-To do :
+- To do :
   - mobile website version
   - start menu
   - ending menu
