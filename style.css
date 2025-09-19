@@ -1,0 +1,113 @@
+body {
+	background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+	font-family: 'Arial', sans-serif;
+	margin: 0;
+	min-height: 100vh;
+	padding: 20px;
+}
+
+h1 {
+	text-align: center;
+	color: white;
+	font-size: 2.5rem;
+	margin-bottom: 30px;
+	text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.container {
+	background: white;
+	border: none;
+	margin: 0 auto;
+	border-radius: 20px;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	padding: 40px;
+	gap: 60px;
+	max-width: 1000px;
+	box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+#hangmanCanvas {
+	background: #fafafa;
+	border: 2px solid #ddd;
+	border-radius: 10px;
+	box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.guess {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	min-width: 300px;
+	gap: 20px;
+}
+
+.guessLetters {
+	text-align: center;
+	margin: 0;
+	padding: 20px;
+	font-size: 40px;
+	font-weight: bold;
+	color: #333;
+	background: #f8f9fa;
+	border-radius: 10px;
+	min-height: 60px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.guessLetters span {
+	display: inline-block;
+	width: 35px;
+	height: 50px;
+	font-size: 40px;
+	margin: 0 3px;
+	color: #667eea;
+	border-bottom: 3px solid #667eea;
+	text-align: center;
+	line-height: 50px;
+}
+
+#guessInput {
+	padding: 15px 20px;
+	font-size: 18px;
+	border: 2px solid #ddd;
+	border-radius: 10px;
+	text-align: center;
+	width: 60px;
+	outline: none;
+	transition: all 0.3s ease;
+	text-transform: uppercase;
+}
+
+#guessInput:focus {
+	border-color: #667eea;
+	box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
+}
+
+button {
+	background: linear-gradient(45deg, #667eea, #764ba2);
+	color: white;
+	border: none;
+	padding: 15px 30px;
+	font-size: 16px;
+	font-weight: bold;
+	border-radius: 25px;
+	cursor: pointer;
+	transition: all 0.3s ease;
+	box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+button:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+}
+
+button:active {
+	transform: translateY(0);
+}
