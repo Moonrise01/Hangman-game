@@ -83,26 +83,11 @@ function letterNotValidBox(){
 }
 
 function drawing(){
-    if (mistakes === 1){
-        drawGallows1();
-    }else if (mistakes === 2){
-        drawGallows2();
-    }else if (mistakes === 3){
-        drawGallows3();
-    }else if (mistakes === 4){
-        drawGallows4();
-    }else if (mistakes === 5){
-        drawHead();
-    }else if (mistakes === 6){
-        drawBody();
-    }else if (mistakes === 7){
-        drawLeftArm();
-    }else if (mistakes === 8){
-        drawRightArm();
-    }else if (mistakes === 9){
-        drawLeftLeg();
-    }else if (mistakes >= 10){
-        drawRightLeg();
-        alert("You lose");
+    let arr = [null, drawGallows1, drawGallows2, drawGallows3, drawGallows4,
+        drawHead, drawBody, drawLeftArm, drawRightArm, drawLeftLeg, drawRightLeg];
+
+    if (mistakes > 0 && mistakes <= 10) {
+        arr[mistakes]();
     }
 }
+
