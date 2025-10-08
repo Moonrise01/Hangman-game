@@ -7,11 +7,12 @@ Just a game of hangman.
   - the player can enter a letter
   - draw the character when the player get the letter wrong
 
+- V1.5: added a few minor things and some bug correction:
+  - start menu
+  - add dificulties
+  - add other languages
 
 - To do :
   - mobile website version
-  - start menu
   - ending menu
   - show a list of the letters which were already use
-  - add dificulties
-  - add other languages
