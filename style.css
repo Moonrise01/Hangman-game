@@ -1,113 +1,144 @@
-body {
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html{
 	background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 	font-family: 'Arial', sans-serif;
+	height: 100vh;
+}
+
+body{
 	margin: 0;
 	min-height: 100vh;
 	padding: 20px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
 }
 
 h1 {
 	text-align: center;
 	color: white;
-	font-size: 2.5rem;
+	font-size: 3rem;
 	margin-bottom: 30px;
-	text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+	text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+	letter-spacing: 2px;
+	font-weight: bold;
 }
 
 .container {
-	background: white;
+	background: rgba(255, 255, 255, 0.95);
 	border: none;
 	margin: 0 auto;
 	border-radius: 20px;
 	display: flex;
-	flex-direction: row;
-	align-items: center;
-	justify-content: center;
-	padding: 40px;
-	gap: 60px;
-	max-width: 1000px;
-	box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-}
-
-#hangmanCanvas {
-	background: #fafafa;
-	border: 2px solid #ddd;
-	border-radius: 10px;
-	box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-}
-
-.guess {
-	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	min-width: 300px;
-	gap: 20px;
+	padding: 40px;
+	gap: 30px;
+	max-width: 450px;
+	min-width: 350px;
+	box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+	backdrop-filter: blur(10px);
+	border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
-.guessLetters {
-	text-align: center;
-	margin: 0;
-	padding: 20px;
-	font-size: 40px;
-	font-weight: bold;
-	color: #333;
-	background: #f8f9fa;
-	border-radius: 10px;
-	min-height: 60px;
+.menu {
+	width: 100%;
 	display: flex;
-	align-items: center;
-	justify-content: center;
-	box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+	flex-direction: column;
+	gap: 20px;
+	border: none;
 }
 
-.guessLetters span {
-	display: inline-block;
-	width: 35px;
-	height: 50px;
-	font-size: 40px;
-	margin: 0 3px;
-	color: #667eea;
-	border-bottom: 3px solid #667eea;
+.menu label {
+	font-size: 1.2rem;
+	font-weight: 600;
+	color: #333;
 	text-align: center;
-	line-height: 50px;
+	margin-bottom: 8px;
 }
 
-#guessInput {
-	padding: 15px 20px;
-	font-size: 18px;
+.menu select {
+	width: 100%;
+	padding: 12px 16px;
+	font-size: 1rem;
 	border: 2px solid #ddd;
-	border-radius: 10px;
-	text-align: center;
-	width: 60px;
-	outline: none;
+	border-radius: 12px;
+	background-color: white;
+	color: #333;
+	cursor: pointer;
 	transition: all 0.3s ease;
-	text-transform: uppercase;
+	appearance: none;
+	background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6,9 12,15 18,9"></polyline></svg>');
+	background-repeat: no-repeat;
+	background-position: right 12px center;
+	background-size: 16px;
+	padding-right: 40px;
 }
 
-#guessInput:focus {
+.menu select:hover {
+	border-color: #667eea;
+	box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+	transform: translateY(-1px);
+}
+
+.menu select:focus {
+	outline: none;
 	border-color: #667eea;
 	box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
 }
 
+.menu select option {
+	padding: 8px;
+	background: white;
+	color: #333;
+}
+
 button {
-	background: linear-gradient(45deg, #667eea, #764ba2);
+	background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 	color: white;
 	border: none;
-	padding: 15px 30px;
-	font-size: 16px;
+	padding: 16px 32px;
+	font-size: 1.1rem;
 	font-weight: bold;
-	border-radius: 25px;
+	border-radius: 12px;
 	cursor: pointer;
 	transition: all 0.3s ease;
 	box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	width: 100%;
+	position: relative;
+	overflow: hidden;
+}
+
+button::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: -100%;
+	width: 100%;
+	height: 100%;
+	background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+	transition: left 0.5s;
 }
 
 button:hover {
 	transform: translateY(-2px);
-	box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+	box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+}
+
+button:hover::before {
+	left: 100%;
 }
 
 button:active {
 	transform: translateY(0);
+	box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
 }

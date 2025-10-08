@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<title>Hangman Game</title>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+
+<h1>Hangman Game</h1>
+<div class="container">
+	<canvas id="hangmanCanvas" width="400" height="400"></canvas>
+	<div class="guess">
+		<div id="guessWord" class="guessLetters"></div>
+		<input type="text" id="guessInput" maxlength="1" placeholder="Letter">
+		<button onclick="getGuess()">Guess</button>
+	</div>
+</div>
+
+
+
+<script src="hangman.js"></script>
+<script src="drawing.js"></script>
+
+</body>
+</html>
