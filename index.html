@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Menu</title>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<h1>Hangman</h1>
+	<div class="container">
+		<div class="menu">
+			<label for="langue">Language</label>
+			<select id="langue">
+				<option value="french">French</option>
+				<option value="english">English</option>
+				<option value="spanish">Spanish</option>
+			</select>
+
+			<label for="difficulty">Difficulty</label>
+			<select id="difficulty">
+				<option value="easy">Easy</option>
+				<option value="medium">Medium</option>
+				<option value="hard">Hard</option>
+			</select>
+		</div>
+		<button onclick="startGame()">Start Game</button>
+	</div>
+	<script src="game/hangman.js"></script>
+</body>
+</html>
