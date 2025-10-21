@@ -1,0 +1,83 @@
+
+/* Adaptations spécifiques pour la page de jeu */
+h1 {
+	font-size: 2.5rem; /* Plus petit que le défaut de common.css */
+}
+
+.container {
+	max-width: 1000px; /* Plus large pour le jeu */
+	flex-direction: row; /* Horizontal au lieu de vertical */
+	gap: 60px; /* Plus d'espace entre les éléments */
+}
+
+/* Styles spécifiques au jeu */
+#hangmanCanvas {
+	background: #fafafa;
+	border: 2px solid #ddd;
+	border-radius: 10px;
+	box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.guess {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	min-width: 300px;
+	gap: 20px;
+}
+
+.guessLetters {
+	text-align: center;
+	margin: 0;
+	padding: 20px;
+	font-size: 40px;
+	font-weight: bold;
+	color: #333;
+	background: #f8f9fa;
+	border-radius: 10px;
+	min-height: 60px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.guessLetters span {
+	display: inline-block;
+	width: 35px;
+	height: 50px;
+	font-size: 40px;
+	margin: 0 3px;
+	color: #667eea;
+	border-bottom: 3px solid #667eea;
+	text-align: center;
+	line-height: 50px;
+}
+
+#guessInput {
+	padding: 15px 20px;
+	font-size: 18px;
+	border: 2px solid #ddd;
+	border-radius: 10px;
+	text-align: center;
+	width: 60px;
+	outline: none;
+	transition: all 0.3s ease;
+	text-transform: uppercase;
+}
+
+#guessInput:focus {
+	border-color: #667eea;
+	box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
+}
+
+/* Override des styles de bouton pour la page de jeu */
+button {
+	width: auto; /* Pas de largeur 100% pour les boutons du jeu */
+	padding: 15px 30px; /* Padding plus petit */
+	font-size: 16px; /* Police plus petite */
+	border-radius: 25px; /* Plus arrondi */
+	text-transform: none; /* Pas de majuscules automatiques */
+	letter-spacing: normal; /* Pas d'espacement des lettres */
+}

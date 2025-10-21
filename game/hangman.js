@@ -3,7 +3,10 @@ let mistakes = 0;
 let words = [];
 let language;
 let difficulty;
+let nbLettersGuessed = [];
 
+
+/*The function change the page from start one to the game and store the difficulty and language*/
 function startGame(){
     language = document.getElementById('langue').value;
     difficulty = document.getElementById('difficulty').value;
@@ -11,11 +14,14 @@ function startGame(){
     sessionStorage.setItem('language', language);
     sessionStorage.setItem('difficulty', difficulty);
 
-    window.location.href = './game/index.html';
+    window.location.href = './game/game.html';
 }
 
+
+/*When the page change, it set which file must be use for the word and then start the game*/
 window.addEventListener('DOMContentLoaded', function() {
-    if (document.getElementById('guessWord')) {
+    const page = window.location.pathname.split("/").pop();
+    if (page === "game.html") {
         language = sessionStorage.getItem('language');
         difficulty = sessionStorage.getItem('difficulty');
 
@@ -35,9 +41,33 @@ window.addEventListener('DOMContentLoaded', function() {
         }
 
         initGame(path);
+
+
+        const guessInput = document.getElementById('guessInput');
+        if (guessInput) {
+            guessInput.addEventListener('keypress', function(event) {
+                if (event.key === 'Enter') {
+                    event.preventDefault();
+                    getGuess();
+                }
+            });
+        }
+    }
+
+    if (page === "end.html"){
+        let statut = sessionStorage.getItem('statut');
+        if (statut === "win"){
+            document.getElementById('statut').textContent = 'You win!';
+        }else if (statut === "fail"){
+            document.getElementById('statut').textContent = 'You lose!';
+            document.getElementById('secretWord').textContent = sessionStorage.getItem('secretWord');
+
+        }
     }
 });
 
+
+/*The function load the word and store it in secretWord*/
 async function initGame(path){
     words = await loadWords(path);
     secretWord = randomWord(words).toUpperCase();
@@ -45,6 +75,8 @@ async function initGame(path){
 
 }
 
+
+/*The function load the word from the file*/
 async function loadWords(path) {
     const res =await fetch(path, { cache: 'no-store' });
     if (!res.ok) console.error('No such words found!');
@@ -56,10 +88,14 @@ async function loadWords(path) {
         .filter(Boolean);
 }
 
+
+/*The function return a random word from the array*/
 function randomWord(arr){
     return arr[Math.floor(Math.random() * arr.length)];
 }
 
+
+/*The function display the word in the page*/
 function setupWordDisplay() {
     let container = document.getElementById('guessWord');
 
@@ -68,6 +104,7 @@ function setupWordDisplay() {
 
         if (i === 0 ){
             letterSpan.textContent = secretWord[i].toUpperCase();
+            nbLettersGuessed.push(secretWord[i].toUpperCase());
         }else{
             letterSpan.textContent = ' ';
         }
@@ -77,6 +114,8 @@ function setupWordDisplay() {
     }
 }
 
+
+/*The function check if the guess is correct and display the result*/
 function getGuess() {
     let inputGuess = document.getElementById('guessInput');
     let input = inputGuess.value.toUpperCase();
@@ -86,8 +125,16 @@ function getGuess() {
     }
 
     inputGuess.value = '';
+
+    if (mistakes === 10) {
+        endGame( "fail")
+    }else if (nbLettersGuessed.join('') === secretWord){
+        endGame("win");
+    }
 }
 
+
+/*The function check if the guess is correct, if it is, display the result. If not, display the gallows*/
 function checkGuess(input) {
     let mot = false;
 
@@ -102,6 +149,7 @@ function checkGuess(input) {
             let letterSpan = document.getElementsByClassName('letter')[i];
             letterSpan.textContent = input;
             mot = true;
+            nbLettersGuessed[i] = input;
         }
     }
 
@@ -111,6 +159,16 @@ function checkGuess(input) {
     drawing();
 }
 
+
+/*The function end the game and display the result*/
+function endGame(statut){
+    sessionStorage.setItem('statut', statut);
+    sessionStorage.setItem('secretWord', secretWord);
+    window.location.href = './end.html';
+}
+
+
+/*The function display the gallows*/
 function drawing(){
     let arr = [null, drawGallows1, drawGallows2, drawGallows3, drawGallows4,
         drawHead, drawBody, drawLeftArm, drawRightArm, drawLeftLeg, drawRightLeg];
@@ -118,4 +176,18 @@ function drawing(){
     if (mistakes > 0 && mistakes <= 10) {
         arr[mistakes]();
     }
+}
+
+
+/*The function reset the game*/
+function reset(){
+    window.location.href = '../index.html';
+    sessionStorage.clear();
+}
+
+
+/*The function play again*/
+function playAgain(){
+    window.location.href = './game.html';
+
 }
