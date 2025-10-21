@@ -12,7 +12,9 @@ Just a game of hangman.
   - add dificulties
   - add other languages
 
+- V1.75 : added more stuff :
+  - ending menu
+
 - To do :
   - mobile website version
-  - ending menu
   - show a list of the letters which were already use
