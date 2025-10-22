@@ -186,8 +186,9 @@ function reset(){
 }
 
 
-/*The function play again*/
+/*The function start over the game*/
 function playAgain(){
     window.location.href = './game.html';
 
 }
+
