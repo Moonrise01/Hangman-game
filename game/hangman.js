@@ -140,16 +140,13 @@ function checkGuess(input) {
 
     for (let i = 0; i < secretWord.length; i++) {
         let letter = secretWord[i];
-        if ("éèê".toUpperCase().includes(letter)) letter = "E";
-        if ("ü".toUpperCase().includes(letter)) letter = "U";
-        if ("ä".toUpperCase().includes(letter)) letter = "A";
-        if ("îï".toUpperCase().includes(letter)) letter = "I";
+        letter = letter.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toUpperCase();
 
         if (input === letter) {
             let letterSpan = document.getElementsByClassName('letter')[i];
-            letterSpan.textContent = input;
+            letterSpan.textContent = secretWord[i];
             mot = true;
-            nbLettersGuessed[i] = input;
+            nbLettersGuessed[i] = secretWord[i];
         }
     }
 
@@ -186,9 +183,8 @@ function reset(){
 }
 
 
-/*The function start over the game*/
+/*The function play again*/
 function playAgain(){
     window.location.href = './game.html';
 
 }
-
